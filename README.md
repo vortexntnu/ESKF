@@ -25,7 +25,7 @@ can be found in apps/ros/launch
 
 See Overwater_30_min_test.launch for a good example.
 
-output="screen" will print all internal prints as well as those from ROS.
+output="screen" will print all internal prints as well as those from ROS.  
 clear_params="true": important. Clears all previous params with the same names. 
 
 
@@ -51,7 +51,7 @@ can be found in apps/ros/parameters
 - R_dvl (output noise cov. matrix of dvl)
 - sr_dvl_to_NED (orientation and placement of sensor in BODY) 
 - sr_dvl_alignment (error in placement)
-- pressure2_topic
-- R_pressure2 (measurement noise)
+- pressureZ_topic
+- R_pressureZ (measurement noise)
 - initial_pose (where it starts in world frame. Includes biases and gravity estimates)
 - initial_covariance (of all states, in same order as in initial pose)
