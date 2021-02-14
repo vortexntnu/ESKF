@@ -4,6 +4,7 @@
 #include <Eigen/Dense>
 #include <cmath>
 #include <unsupported/Eigen/MatrixFunctions>
+#include <vector>
 
 
 
