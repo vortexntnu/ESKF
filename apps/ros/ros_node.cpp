@@ -208,7 +208,7 @@ void ESKF_Node::dvlCallback(const nav_msgs::Odometry::ConstPtr& dvl_Message_data
 void ESKF_Node::pressureZCallback(const sensor_msgs::FluidPressure::ConstPtr& pressureZ_Message_data)
 {
   Matrix<double, 1, 1> RpressureZ;
-  const double raw_pressure_z = pressureZ_Message_data->fluid_pressure;
+  const double raw_pressure_z = (pressureZ_Message_data->fluid_pressure)/(1023.6*9.81);
 
   RpressureZ(0) = pressureZ_Message_data->variance;
 
