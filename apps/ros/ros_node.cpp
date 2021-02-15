@@ -44,7 +44,7 @@ ESKF_Node::ESKF_Node(const ros::NodeHandle& nh, const ros::NodeHandle& pnh)
                                                    ros::TransportHints().tcpNoDelay(true));
   // Subscribe to Pressure sensor
   ROS_INFO("Subscribing to pressure sensor: %s", pressureZ_topic.c_str());
-  subscribePressureZ_ = nh_.subscribe<nav_msgs::Odometry>(pressureZ_topic, 1000, &ESKF_Node::pressureZCallback, this,
+  subscribePressureZ_ = nh_.subscribe<sensor_msgs::FluidPressure>(pressureZ_topic, 1000, &ESKF_Node::pressureZCallback, this,
                                                           ros::TransportHints().tcpNoDelay(true));
 
   ROS_INFO("Publish NIS DVL");
@@ -205,12 +205,12 @@ void ESKF_Node::dvlCallback(const nav_msgs::Odometry::ConstPtr& dvl_Message_data
 }
 
 // PressureZ subscriber
-void ESKF_Node::pressureZCallback(const nav_msgs::Odometry::ConstPtr& pressureZ_Message_data)
+void ESKF_Node::pressureZCallback(const sensor_msgs::FluidPressure::ConstPtr& pressureZ_Message_data)
 {
   Matrix<double, 1, 1> RpressureZ;
-  const double raw_pressure_z = pressureZ_Message_data->pose.pose.position.z;
+  const double raw_pressure_z = pressureZ_Message_data->fluid_pressure;
 
-  RpressureZ(0) = pressureZ_Message_data->pose.covariance[0];
+  RpressureZ(0) = pressureZ_Message_data->variance;
 
   // std::cout<<RpressureZ<<std::endl;
   // const double R_pressureZ = 2.2500;

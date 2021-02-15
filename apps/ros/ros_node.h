@@ -6,6 +6,7 @@
 #include "ros/ros.h"
 #include "sensor_msgs/Imu.h"
 #include "nav_msgs/Odometry.h"
+#include "sensor_msgs/FluidPressure.h"
 
 const Eigen::Matrix3d R_ACC((Eigen::Matrix3d() << 4, 0, 0, 0, 4, 0, 0, 0, 4).finished());
 const Eigen::Matrix3d R_ACCBIAS((Eigen::Matrix3d() << 6e-5, 0, 0, 0, 6e-5, 0, 0, 0, 6e-5).finished());
@@ -73,7 +74,7 @@ private:
   void dvlCallback(const nav_msgs::Odometry::ConstPtr& dvl_Message_data);
   void publishPoseState(const ros::TimerEvent&);
   
-  void pressureZCallback(const nav_msgs::Odometry::ConstPtr& pressureZ_Message_data);
+  void pressureZCallback(const sensor_msgs::FluidPressure::ConstPtr& pressureZ_Message_data);
 
 
 
