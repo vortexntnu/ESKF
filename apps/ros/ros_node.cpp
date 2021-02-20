@@ -208,7 +208,11 @@ void ESKF_Node::dvlCallback(const nav_msgs::Odometry::ConstPtr& dvl_Message_data
 void ESKF_Node::pressureZCallback(const sensor_msgs::FluidPressure::ConstPtr& pressureZ_Message_data)
 {
   Matrix<double, 1, 1> RpressureZ;
-  const double raw_pressure_z = (pressureZ_Message_data->fluid_pressure)/(1023.6*9.81);
+  // compute depth
+	const float gauge_pressure = 1000*pressureZ_Message_data->fluid_pressure - 101325; //[Pa] //Antar fluid_pressure gir oss trykk i kPa. Antar også 1atm + trykk fra væske
+	const float depth_meters = gauge_pressure / (997.04074 * 9.80665); //[m]
+  
+  const double raw_pressure_z = depth_meters; 
 
   RpressureZ(0) = pressureZ_Message_data->variance;
 
